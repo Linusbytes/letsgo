@@ -74,7 +74,7 @@ html {
 .wp-block-navigation ul li {
     flex: auto !important;
     justify-content: center !important;
-    text-color: #515160;
+    color: #515160;
     z-index: 50;
 }
 
@@ -143,7 +143,8 @@ html {
 /* Hover and active states */
 .policy-menu .wp-block-navigation-item:hover a,
 .policy-menu .wp-block-navigation-item__content:hover,
-.policy-menu .wp-block-navigation-item.current-menu-item a .policy-menu .wp-block-navigation-item__content[aria-current="page"],
+.policy-menu .wp-block-navigation-item.current-menu-item a,
+.policy-menu .wp-block-navigation-item__content[aria-current="page"],
 .policy-menu .wp-block-navigation-item__content[aria-current="true"] {
     color: var(--wp--preset--color--dark-green, #174c3f);
     font-weight: 500;

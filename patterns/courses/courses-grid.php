@@ -6,8 +6,8 @@
  */
 
 
-const SVLTI_COURSE_POST_TYPE = 'course';      
-const SVLTI_PILLAR_TAXONOMY = 'course-pillar'; 
+const SVLTI_COURSE_POST_TYPE = 'course';
+const SVLTI_PILLAR_TAXONOMY = 'course-pillar';
 
 // Helpers
 if (!function_exists('svlti_courses_build_url')) {
@@ -118,8 +118,8 @@ $courses_q = svlti_get_courses_query($current_pillar, 9);
 
         <div class="relative inline-block text-left relative-dropdown-container w-full md:w-auto mt-4 md:mt-0">
             <div class="flex justify-end">
-                <button type="button" class="custom-filter-btn px-4"
-                    onclick="this.nextElementSibling.classList.toggle('hidden')">
+                <button type="button" class="custom-filter-btn px-4" aria-expanded="false" aria-haspopup="true"
+                    onclick="const menu = this.nextElementSibling; const expanded = this.getAttribute('aria-expanded') === 'true'; this.setAttribute('aria-expanded', !expanded); menu.classList.toggle('hidden');">
                     Filter
                 </button>
                 <div
@@ -149,7 +149,7 @@ $courses_q = svlti_get_courses_query($current_pillar, 9);
     <!-- /wp:html -->
 
     <!-- wp:group {"className":"grid grid-cols-1 md:grid-cols-3 gap-6"} -->
-    <d iv class="wp-block-group grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="wp-block-group grid grid-cols-1 md:grid-cols-3 gap-6">
 
         <! -- wp:html -->
             <?php if ($courses_q->have_posts()): ?>
@@ -158,9 +158,9 @@ $courses_q = svlti_get_courses_query($current_pillar, 9);
                     $post_id = get_the_ID();
                     $c = svlti_course_card_data($post_id);
                     ?>
-                    <d iv class="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col h-full">
+                    <div class="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col h-full">
 
-                        <fig ure class="wp-block-image size-large h-full overflow-hidden">
+                        <figure class="wp-block-image size-large h-full overflow-hidden">
                             <?php if ($c['has_thumb']): ?>
                                 <?= $c['thumb_html']; ?>
                             <?php else: ?>
@@ -168,7 +168,7 @@ $courses_q = svlti_get_courses_query($current_pillar, 9);
                             <?php endif; ?>
                             </figure>
 
-                            <d iv class="p-6 flex flex-col h-full">
+                            <div class="p-6 flex flex-col h-full">
 
                                 <h3 class="text-xl font-bold text-gray-900 mb-3">
                                     <?= esc_html($c['title']) ?>
@@ -182,8 +182,7 @@ $courses_q = svlti_get_courses_query($current_pillar, 9);
 
                                 <?php if ($c['certification']): ?>
 
-                                    <div class="flex items-start 
-                  t         ext-sm text-gray-600 mb-3">
+                                    <div class="flex items-start text-sm text-gray-600 mb-3">
                                         <svg class="w-4 h-4 mt-0.5 mr-2 text-yellow-500 flex-shrink-0"
                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                             <path fill="currentColor"
@@ -255,7 +254,7 @@ $courses_q = svlti_get_courses_query($current_pillar, 9);
                                     </a>
                                 </div>
 
-        </div>
+                    </div>
         </div>
     <?php endwhile;
                 wp_reset_postdata(); ?>

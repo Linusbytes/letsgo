@@ -30,6 +30,12 @@ $duration = trim((string) $dur1 . ' ' . (string) $dur2);
 $learning_mode = get_field('learning_mode', $post_id);
 $assessment = get_field('assessment_type', $post_id);
 
+$cert = get_field('certification', $post_id);
+$prereq = get_field('prerequisites', $post_id);
+$enroll_url = get_field('enroll_url', $post_id);
+$brochure_url = get_field('brochure_url', $post_id);
+$excerpt = get_field('excerpt', $post_id);
+
 
 // Featured image
 $cover_url = '';
@@ -87,29 +93,29 @@ $blogs_index_url = home_url('/blogs');
             <?php endif; ?>
 
             <?php if ($content): ?>
-                <p class="text-white text-base mt-4 mb-6">
-                        <?php echo apply_filters('the_content', $content); ?>
-                </p>
-          <?php endif; ?>
+                <div class="text-white text-base mt-4 mb-6">
+                    <?php echo apply_filters('the_content', $content); ?>
+                </div>
+            <?php endif; ?>
 
-         <?php if ($prereq): ?>
+            <?php if ($prereq): ?>
                 <p class="text-white text-sm">
                     <strong>Prerequisites:</strong> <?php echo esc_html($prereq); ?>
                 </p>
-          <?php endif; ?>
+            <?php endif; ?>
 
             <div class="wp-block-group flex flex-wrap gap-6 mt-6">
-             <?php if ($duration): ?>
+                <?php if ($duration): ?>
                     <p class="text-white text-sm">🕐 <strong><?php echo esc_html($duration); ?></strong></p>
-              <?php endif; ?>
+                <?php endif; ?>
 
-             <?php if ($learning_mode): ?>
+                <?php if ($learning_mode): ?>
                     <p class="text-white text-sm">🏫 <strong><?php echo esc_html($learning_mode); ?></strong></p>
-              <?php endif; ?>
+                <?php endif; ?>
 
-             <?php if ($assessment): ?>
+                <?php if ($assessment): ?>
                     <p class="text-white text-sm">📝 <strong><?php echo esc_html($assessment); ?></strong></p>
-              <?php endif; ?>
+                <?php endif; ?>
             </div>
 
             <div class="wp-block-buttons flex gap-4 mt-8">

@@ -59,7 +59,7 @@ if (!function_exists('svlti_blog_card_data')) {
     {
         // ACF fields
         $blog_title = get_the_title($post_id);
-        $blog_content = get_the_content($post_id);
+        $blog_content = get_post_field('post_content', $post_id);
 
         // data for author
         $author_id = get_post_field('post_author', $post_id);
@@ -115,8 +115,8 @@ $blogs_q = svlti_get_blogs_query($current_category, 9);
 
         <div class="relative inline-block text-left relative-dropdown-container w-full md:w-auto mt-4 md:mt-0">
             <div class="flex justify-end">
-                <button type="button" class="custom-filter-btn px-4"
-                    onclick="this.nextElementSibling.classList.toggle('hidden')">
+                <button type="button" class="custom-filter-btn px-4" aria-expanded="false" aria-haspopup="true"
+                    onclick="const menu = this.nextElementSibling; const expanded = this.getAttribute('aria-expanded') === 'true'; this.setAttribute('aria-expanded', !expanded); menu.classList.toggle('hidden');">
                     Filter
                 </button>
                 <div
