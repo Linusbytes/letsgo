@@ -6,7 +6,7 @@
  */
 
 const SVLTI_BLOG_POST_TYPE = 'blogs';
-const SVLTI_BLOG_CATEGORY  = 'blog-category';
+const SVLTI_BLOG_CATEGORY = 'blog-category';
 
 // Helpers
 if (!function_exists('svlti_blogs_build_url')) {
@@ -34,18 +34,18 @@ if (!function_exists('svlti_get_blogs_query')) {
     function svlti_get_blogs_query(string $category_slug = 'all', int $per_page = 9)
     {
         $args = [
-            'post_type'      => SVLTI_BLOG_POST_TYPE,
-            'post_status'    => 'publish',
+            'post_type' => SVLTI_BLOG_POST_TYPE,
+            'post_status' => 'publish',
             'posts_per_page' => $per_page,
-            'paged'          => max(1, (int) get_query_var('paged', 1)),
+            'paged' => max(1, (int) get_query_var('paged', 1)),
         ];
 
         if ($category_slug !== '' && $category_slug !== 'all') {
             $args['tax_query'] = [
                 [
                     'taxonomy' => SVLTI_BLOG_CATEGORY,
-                    'field'    => 'slug',
-                    'terms'    => [$category_slug],
+                    'field' => 'slug',
+                    'terms' => [$category_slug],
                 ],
             ];
         }
@@ -58,8 +58,8 @@ if (!function_exists('svlti_blog_card_data')) {
     function svlti_blog_card_data(int $post_id): array
     {
         // ACF fields
-        $blog_title  = get_the_title($post_id);
-        $blog_content  = get_the_content($post_id);
+        $blog_title = get_the_title($post_id);
+        $blog_content = get_the_content($post_id);
 
 
         // blog categories
@@ -71,13 +71,13 @@ if (!function_exists('svlti_blog_card_data')) {
 
 
         return [
-            'title'         => $blog_title,
-            'content'       => $blog_content,
-            'categories'    => $categories,
-            'permalink'     => get_permalink($post_id),
-            'has_thumb'     => has_post_thumbnail($post_id),
-            'thumb_html'    => get_the_post_thumbnail($post_id, 'large', [
-                'alt'   => esc_attr($blog_title),
+            'title' => $blog_title,
+            'content' => $blog_content,
+            'categories' => $categories,
+            'permalink' => get_permalink($post_id),
+            'has_thumb' => has_post_thumbnail($post_id),
+            'thumb_html' => get_the_post_thumbnail($post_id, 'large', [
+                'alt' => esc_attr($blog_title),
                 'class' => 'w-full h-full object-cover',
             ]),
         ];
@@ -89,7 +89,7 @@ $current_category = isset($_GET['category']) ? sanitize_title(wp_unslash($_GET['
 
 // Pill terms for pills
 $category_terms = get_terms([
-    'taxonomy'   => SVLTI_BLOG_CATEGORY,
+    'taxonomy' => SVLTI_BLOG_CATEGORY,
     'hide_empty' => false,
 ]);
 
@@ -100,27 +100,39 @@ $blogs_q = svlti_get_blogs_query($current_category, 9);
 <!-- wp:group {"className":"w-full py-8"} -->
 <div class="wp-block-group w-full py-8">
 
-    <!-- wp:heading {"level":2,"className":"text-3xl md:text-4xl font-bold text-[#2b8c77] mb-5"} -->
-    <h2 class="wp-block-heading text-3xl md:text-4xl font-bold text-[#2b8c77] mb-5">Blog</h2>
-    <!-- /wp:heading -->
-
     <!-- wp:html -->
-    <div class="flex flex-wrap items-center gap-2 mb-8">
-        <a href="<?= svlti_blogs_build_url(['category' => 'all']) ?>"
-            class="px-4 py-2 rounded-full text-sm font-medium <?= ($current_category === 'all' ? 'bg-[#2b8c77] text-white' : 'bg-white border border-gray-300 hover:bg-gray-50') ?>">
-            All
-        </a>
+    <div class="flex flex-wrap justify-between items-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#2b8c77]">Blog</h2>
 
-        <?php if (!is_wp_error($category_terms) && !empty($category_terms)) : ?>
-            <?php foreach ($category_terms as $term) :
-                $active = ($current_category === $term->slug);
-            ?>
-                <a href="<?= svlti_blogs_build_url(['category' => $term->slug]) ?>"
-                    class="px-4 py-2 rounded-full text-sm font-medium <?= ($active ? 'bg-[#2b8c77] text-white' : 'bg-white border border-gray-300 hover:bg-gray-50') ?>">
-                    <?= esc_html($term->name) ?>
-                </a>
-            <?php endforeach; ?>
-        <?php endif; ?>
+
+        <div class="relative inline-block text-left relative-dropdown-container w-full md:w-auto mt-4 md:mt-0">
+            <div class="flex justify-end">
+                <button type="button" class="custom-filter-btn px-4"
+                    onclick="this.nextElementSibling.classList.toggle('hidden')">
+                    Filter
+                </button>
+                <div
+                    class="hidden absolute right-0 z-50 mt-14 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div class="py-1">
+                        <a href="<?= svlti_blogs_build_url(['category' => 'all']) ?>"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 <?= ($current_category === 'all' ? 'bg-gray-100 font-bold text-[#2b8c77]' : '') ?>">
+                            All
+                        </a>
+
+                        <?php if (!is_wp_error($category_terms) && !empty($category_terms)): ?>
+                            <?php foreach ($category_terms as $term):
+                                $active = ($current_category === $term->slug);
+                                ?>
+                                <a href="<?= svlti_blogs_build_url(['category' => $term->slug]) ?>"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 <?= ($active ? 'bg-gray-100 font-bold text-[#2b8c77]' : '') ?>">
+                                    <?= esc_html($term->name) ?>
+                                </a>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /wp:html -->
 
@@ -128,17 +140,18 @@ $blogs_q = svlti_get_blogs_query($current_category, 9);
     <div class="wp-block-group grid grid-cols-1 md:grid-cols-3 gap-6">
 
         <!-- wp:html -->
-        <?php if ($blogs_q->have_posts()) : ?>
-            <?php while ($blogs_q->have_posts()) : $blogs_q->the_post();
+        <?php if ($blogs_q->have_posts()): ?>
+            <?php while ($blogs_q->have_posts()):
+                $blogs_q->the_post();
                 $post_id = get_the_ID();
                 $c = svlti_blog_card_data($post_id);
-            ?>
+                ?>
                 <div class="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col h-full">
 
                     <figure class="wp-block-image size-large h-full overflow-hidden">
-                        <?php if ($c['has_thumb']) : ?>
+                        <?php if ($c['has_thumb']): ?>
                             <?= $c['thumb_html']; ?>
-                        <?php else : ?>
+                        <?php else: ?>
                             <div class="w-full h-full bg-gray-100"></div>
                         <?php endif; ?>
                     </figure>
@@ -149,10 +162,11 @@ $blogs_q = svlti_get_blogs_query($current_category, 9);
                             <?= esc_html($c['title']) ?>
                         </h3>
 
-                        <?php if (!empty($c['categories'])) : ?>
+                        <?php if (!empty($c['categories'])): ?>
                             <div class="flex flex-wrap gap-2 mb-3">
-                                <?php foreach ($c['categories'] as $term) : ?>
-                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs text-dark-green font-medium border border-dark-green">
+                                <?php foreach ($c['categories'] as $term): ?>
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs text-dark-green font-medium border border-dark-green">
                                         <?= esc_html($term->name) ?>
                                     </span>
                                 <?php endforeach; ?>
@@ -171,7 +185,7 @@ $blogs_q = svlti_get_blogs_query($current_category, 9);
                 </div>
             <?php endwhile;
             wp_reset_postdata(); ?>
-        <?php else : ?>
+        <?php else: ?>
             <p class="text-sm opacity-70">No blogs found.</p>
         <?php endif; ?>
         <!-- /wp:html -->
