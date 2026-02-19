@@ -61,6 +61,11 @@ if (!function_exists('svlti_blog_card_data')) {
         $blog_title = get_the_title($post_id);
         $blog_content = get_the_content($post_id);
 
+        // data for author
+        $author_id = get_post_field('post_author', $post_id);
+        $author_name = get_the_author_meta('display_name', $author_id);
+        $post_date = get_the_date('M j, Y', $post_id);
+
 
         // blog categories
         $categories = get_the_terms($post_id, SVLTI_BLOG_CATEGORY);
@@ -70,9 +75,12 @@ if (!function_exists('svlti_blog_card_data')) {
         }
 
 
+
         return [
             'title' => $blog_title,
             'content' => $blog_content,
+            'author_name' => $author_name,
+            'date' => $post_date,
             'categories' => $categories,
             'permalink' => get_permalink($post_id),
             'has_thumb' => has_post_thumbnail($post_id),
@@ -174,7 +182,19 @@ $blogs_q = svlti_get_blogs_query($current_category, 9);
                         <?php endif; ?>
 
 
+
+
+
                         <div class="mt-auto">
+                            <div class="flex items-center gap-2 mb-4 text-xs font-bold tracking-widest uppercase">
+                                <span class="text-[#2b8c77]">
+                                    <?= esc_html($c['author_name']) ?>
+                                </span>
+                                <span class="text-gray-300">|</span>
+                                <span class="text-gray-500">
+                                    <?= esc_html($c['date']) ?>
+                                </span>
+                            </div>
                             <a href="<?= esc_url($c['permalink']) ?>"
                                 class="block text-center bg-[#2b8c77] text-white text-sm font-medium rounded-md py-2 hover:bg-[#247565] transition-colors">
                                 Read ->
