@@ -151,7 +151,7 @@ $courses_q = svlti_get_courses_query($current_pillar, 9);
     <!-- wp:group {"className":"grid grid-cols-1 md:grid-cols-3 gap-6"} -->
     <div class="wp-block-group grid grid-cols-1 md:grid-cols-3 gap-6">
 
-        <! -- wp:html -->
+        <!-- wp:html -->
             <?php if ($courses_q->have_posts()): ?>
                 <?php while ($courses_q->have_posts()):
                     $courses_q->the_post();
