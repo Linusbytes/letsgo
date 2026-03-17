@@ -18,8 +18,9 @@ $post_title = get_the_title($post_id);
 $content = get_post_field('post_content', $post_id);
 
 // Author data
-$author_id = get_post_field('post_author', $post_id);
-$author_name = get_the_author_meta('display_name', $author_id);
+// $author_id = get_post_field('post_author', $post_id);
+// $author_name = get_the_author_meta('display_name', $author_id);
+$author_name = get_field('author', $post_id);
 $post_date = get_the_date('M j, Y', $post_id);
 
 
