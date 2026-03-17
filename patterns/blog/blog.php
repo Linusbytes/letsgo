@@ -92,7 +92,6 @@ $blogs_index_url = home_url('/blogs');
                     ⭐ <strong><?php echo esc_html($cert); ?></strong>
                 </p>
             <?php endif; ?>
-
             <?php if ($content): ?>
                 <div class="text-white text-base mt-4 mb-6">
                     <?php echo apply_filters('the_content', $content); ?>
