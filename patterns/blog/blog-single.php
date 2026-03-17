@@ -1,0 +1,82 @@
+<?php
+
+/**
+ * Title: Blog Single
+ * Slug: svlti/blog-single
+ */
+
+$post_id = get_queried_object_id();
+
+if (!$post_id) {
+    echo '<p>No blog found.</p>';
+    return;
+}
+
+$author_name = get_field('author', $post_id);
+if (!$author_name) {
+    $author_id = get_post_field('post_author', $post_id);
+    $author_name = get_the_author_meta('display_name', $author_id);
+}
+?>
+
+<!-- wp:group {"className":"bg-gradient-to-b from-white to-elm-60 min-h-screen overflow-hidden max-w-screen","layout":{"type":"constrained"}} -->
+<div class="wp-block-group bg-gradient-to-b from-white to-elm-60 min-h-screen overflow-hidden max-w-screen">
+
+    <!-- wp:group {"className":"p-10"} -->
+    <div class="wp-block-group p-10">
+
+        <!-- wp:html -->
+        <a href="<?= esc_url(home_url('/blog')) ?>" class="inline-block mb-4">
+            <button class="text-neutral-120 hover:text-eucalyptus-110 transition-colors cursor-pointer" type="button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 19L8 12L15 5" stroke="#207860" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+        </a>
+        <!-- /wp:html -->
+
+
+        <div class="wp-block-group">
+
+            <!-- wp:columns {"className":"gap-10"} -->
+            <div class="wp-block-columns gap-10">
+
+                <!-- LEFT: title + content -->
+                <!-- wp:column {"width":"60%"} -->
+                <div class="wp-block-column" style="flex-basis:60%">
+                    <!-- wp:post-title {"level":1,"className":"text-4xl font-bold text-elm-900 mb-4"} /-->
+
+                    <!-- wp:group {"className":"flex items-center gap-2 mb-6 text-xs font-bold tracking-widest uppercase","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+                    <div
+                        class="wp-block-group flex items-center gap-2 mb-6 text-xs font-bold tracking-widest uppercase">
+                        <span class="text-[#2b8c77]">
+                            <?= esc_html($author_name) ?>
+                        </span>
+                        <!-- wp:html --><span class="text-gray-300">|</span><!-- /wp:html -->
+                        <!-- wp:post-date {"format":"M j, Y","className":"text-gray-500"} /-->
+                    </div>
+                    <!-- /wp:group -->
+
+                    <!-- wp:post-content {"className":"prose max-w-none"} /-->
+                </div>
+                <!-- /wp:column -->
+
+                <!-- RIGHT: featured image only -->
+                <!-- wp:column {"width":"40%","className":"flex justify-end"} -->
+                <div class="wp-block-column flex justify-end" style="flex-basis:40%">
+                    <!-- wp:post-featured-image {"isLink":false,"sizeSlug":"large","className":"svlti-featured-right"} /-->
+                </div>
+                <!-- /wp:column -->
+
+            </div>
+            <!-- /wp:columns -->
+
+        </div>
+        <!-- /wp:group -->
+
+    </div>
+    <!-- /wp:group -->
+
+</div>
+<!-- /wp:group -->
