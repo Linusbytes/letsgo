@@ -164,7 +164,7 @@ $blogs_q = svlti_get_blogs_query($current_category, 9);
                         <?php endif; ?>
                     </figure>
 
-                    <div class="p-6 flex flex-col h-full">
+                    <div class="p-6 flex flex-col">
 
                         <h3 class="text-xl font-bold text-gray-900 mb-3">
                             <?= esc_html($c['title']) ?>
@@ -185,7 +185,7 @@ $blogs_q = svlti_get_blogs_query($current_category, 9);
 
 
 
-                        <div class="mt-auto">
+                        <div class="mt-10">
                             <div class="flex items-center gap-2 mb-4 text-xs font-bold tracking-widest uppercase">
                                 <span class="text-[#2b8c77]">
                                     <?= esc_html($c['author_name']) ?>
