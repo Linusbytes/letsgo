@@ -12,6 +12,10 @@
     }
   },
   "settings": {
+    "layout": {
+      "contentSize": "1200px",
+      "wideSize": "1200px"
+    },
     "custom": {
       "editorStyle": "assets/css/main.css"
     },
