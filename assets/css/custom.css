@@ -47,7 +47,7 @@ html {
 }
 
 .wp-block-navigation-submenu .wp-block-navigation-item__content {
-  font-weight: 500;
+    font-weight: 500;
 }
 
 .wp-block-navigation__submenu-container a {
@@ -72,15 +72,15 @@ html {
 }
 
 .wp-block-navigation ul li {
-  flex: auto !important;
-  justify-content: center !important;
-  text-color: #515160;
-  z-index: 50; 
+    flex: auto !important;
+    justify-content: center !important;
+    color: #515160;
+    z-index: 50;
 }
 
 .wp-block-navigation ul li>ul {
     left: 50% !important;
-    transform: translateX(-50%) !important; /* pull it back by half its width */
+    transform: translateX(-50%) !important;
     text-align: center !important;
 
 }
@@ -92,13 +92,13 @@ html {
 }
 
 .navigation-link {
-  list-style-type: none !important;
+    list-style-type: none !important;
 }
 
 .hero-button a {
-  border-radius: 0.375rem;
-  transition: background-color 0.5s ease, color 0.3s ease;
-  padding-inline: 30px;
+    border-radius: 0.375rem;
+    transition: background-color 0.5s ease, color 0.3s ease;
+    padding-inline: 30px;
 }
 
 .hero-button a:hover {
@@ -107,54 +107,58 @@ html {
 
 /* Policy side-menu */
 .policy-menu {
-  width: 180px !important;
-  flex: 0 0 220px !important;
-  align-self: flex-start;
+    width: 180px !important;
+    flex: 0 0 220px !important;
+    align-self: flex-start;
 }
 
 /* Remove default bullets and spacing */
 .policy-menu ul,
 .policy-menu li {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 /* Ensure every item is consistent */
 .policy-menu .wp-block-navigation-item {
-  width: 100%;                   /* ensures li fills menu width */
-  border: none; /* remove inconsistent default WP borders */
+    width: 100%;
+    /* ensures li fills menu width */
+    border: none;
+    /* remove inconsistent default WP borders */
 }
 
 /* Each link spans full width and owns its divider */
 .policy-menu .wp-block-navigation-link a,
 .policy-menu .wp-block-navigation-item__content {
-  display: block;
-  width: 100%;
-  padding: 0 0 10px 10px; /* left padding for text */
-  color: #747480;
-  font-weight: 450;
-  border-bottom: 1px solid #ccc; /* clean, equal-width divider */
-  transition: color 0.3s, font-weight 0.3s;
+    display: block;
+    width: 100%;
+    padding: 0 0 10px 10px;
+    /* left padding for text */
+    color: #747480;
+    font-weight: 450;
+    border-bottom: 1px solid #ccc;
+    /* clean, equal-width divider */
+    transition: color 0.3s, font-weight 0.3s;
 }
 
 /* Hover and active states */
 .policy-menu .wp-block-navigation-item:hover a,
 .policy-menu .wp-block-navigation-item__content:hover,
-.policy-menu .wp-block-navigation-item.current-menu-item a
+.policy-menu .wp-block-navigation-item.current-menu-item a,
 .policy-menu .wp-block-navigation-item__content[aria-current="page"],
-.policy-menu .wp-block-navigation-item__content[aria-current="true"]{
-  color: var(--wp--preset--color--dark-green, #174c3f);
-  font-weight: 500;
+.policy-menu .wp-block-navigation-item__content[aria-current="true"] {
+    color: var(--wp--preset--color--dark-green, #174c3f);
+    font-weight: 500;
 }
 
 /* Remove bottom border from the last link */
 .policy-menu .wp-block-navigation-item:last-child .wp-block-navigation-item__content {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 /* Policy section icons */
 .policy-icon img {
-  width: 3rem !important;
-  height: auto;
+    width: 3rem !important;
+    height: auto;
 }
 
 .error-button a {
@@ -244,90 +248,91 @@ html {
     height: 350px;
     object-fit: cover;
 }
-  
+
 
 .policy-img img {
-  width: 100%;
-  height: auto; 
+    width: 100%;
+    height: auto;
 }
 
 .life-skills-img img {
-  width: 75%;
-  height: auto; 
-  display: block;     /* Required for margin auto centering */
-  margin-left: auto;
-  margin-right: auto;
+    width: 75%;
+    height: auto;
+    display: block;
+    /* Required for margin auto centering */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* blog */
 
 .blogNav .wp-block-navigation ul li>ul {
 
-  right: 50% !important;
-  justify-items: center;
+    right: 50% !important;
+    justify-items: center;
 
 }
 
 /* Upcoming event css */
 .events-grid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 36px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 36px;
 }
 
 /* responsive */
 @media(min-width: 640px) {
-  .events-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media(min-width: 1024px) {
-  .events-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+    .events-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 /* easier to edit styling from event-card instead of inline */
 .event-card {
-  width: 100%; 
-  height: 278px;
-  padding: 16px 21px;
-  gap: 22px;
-  border-radius: 12px;
-  border: 1px solid #ccc;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  transition: all 0.3s ease;
-  background-color: #fff;
+    width: 100%;
+    height: 278px;
+    padding: 16px 21px;
+    gap: 22px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    transition: all 0.3s ease;
+    background-color: #fff;
 }
 
 .event-card:hover {
-  background-color: #7EDDC3 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    background-color: #7EDDC3 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 .event-card.closest {
-  background-color: #7EDDC3;
+    background-color: #7EDDC3;
 }
 
 .section-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 16px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid #ccc;
-  margin-top: 25px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #ccc;
+    margin-top: 25px;
 }
 
 .upcoming-events-title {
-  font-size: 1.875rem !important;
-  font-weight: 800 !important;
-  color: #207860 !important;
-  margin-bottom: 10px !important;
-  line-height: 1.2 !important;
+    font-size: 1.875rem !important;
+    font-weight: 800 !important;
+    color: #207860 !important;
+    margin-bottom: 10px !important;
+    line-height: 1.2 !important;
 }
 
 .details-button a {
@@ -337,12 +342,12 @@ html {
 .listing-action-reject-button a {
     padding: 10px 25px;
     color: gray;
-    display: block; 
+    display: block;
 }
 
 .listing-action-reject-button:hover a {
-  color: white; 
-  transition: color 0.5s ease;
+    color: white;
+    transition: color 0.5s ease;
 }
 
 .corner-images img {
@@ -352,48 +357,83 @@ html {
 }
 
 /* Example: style only forms with this class */
-.svlti-form{
-  background: #fff;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 10px 25px rgba(0,0,0,.12);
+.svlti-form {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .12);
 }
 
 .svlti-form input[type="text"],
 .svlti-form input[type="email"],
 .svlti-form select,
-.svlti-form textarea{
-  width: 100%;
-  border: 1px solid #d7dde5;
-  border-radius: 12px;
-  padding: 14px 16px;
+.svlti-form textarea {
+    width: 100%;
+    border: 1px solid #d7dde5;
+    border-radius: 12px;
+    padding: 14px 16px;
 }
 
 /* WPForms submit button */
-.svlti-form .wpforms-submit-container{
-  text-align: center;            
-  margin-top: 24px;
+.svlti-form .wpforms-submit-container {
+    text-align: center;
+    margin-top: 24px;
 }
 
-.svlti-form button.wpforms-submit{
-  background: var(--wp--preset--color--brand);
-  color: #fff;
-  border: 0;
-  border-radius: 10px;
-  padding: 18px 60px;            
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1;
-  cursor: pointer;
-  transition: transform .15s ease, filter .15s ease;
+.svlti-form button.wpforms-submit {
+    background: var(--wp--preset--color--brand);
+    color: #fff;
+    border: 0;
+    border-radius: 10px;
+    padding: 18px 60px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform .15s ease, filter .15s ease;
 }
 
-.svlti-form button.wpforms-submit:hover{
-  filter: brightness(1.05);
-  transform: translateY(-1px);
+.svlti-form button.wpforms-submit:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
 }
 
-.svlti-form button.wpforms-submit:active{
-  transform: translateY(0);
-  filter: brightness(.98);
+.svlti-form button.wpforms-submit:active {
+    transform: translateY(0);
+    filter: brightness(.98);
+}
+
+/* Custom Filter Button */
+.custom-filter-btn {
+    width: auto;
+    min-width: 50px;
+    height: 50px;
+    padding: 0 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.192);
+    cursor: pointer;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.021);
+    transition: all 0.3s;
+    background: white;
+    font-weight: 500;
+    color: rgb(77, 77, 77);
+}
+
+.custom-filter-btn svg {
+    height: 16px;
+    fill: rgb(77, 77, 77);
+    transition: all 0.3s;
+}
+
+.custom-filter-btn:hover {
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.11);
+    background-color: rgb(59, 59, 59);
+    color: white;
+}
+
+.custom-filter-btn:hover svg {
+    fill: white;
 }
