@@ -31,21 +31,24 @@ if (!function_exists('svlti_blogs_build_url')) {
 }
 
 if (!function_exists('svlti_get_blogs_query')) {
-    function svlti_get_blogs_query(string $category_slug = 'all', int $per_page = 9)
+    function svlti_get_blogs_query(array $category_slugs = [], int $per_page = 9)
     {
         $args = [
-            'post_type' => SVLTI_BLOG_POST_TYPE,
-            'post_status' => 'publish',
+            'post_type'      => SVLTI_BLOG_POST_TYPE,
+            'post_status'    => 'publish',
             'posts_per_page' => $per_page,
-            'paged' => max(1, (int) get_query_var('paged', 1)),
+            'paged'          => max(1, (int) get_query_var('paged', 1)),
         ];
 
-        if ($category_slug !== '' && $category_slug !== 'all') {
+        $filtered = array_filter($category_slugs, fn($s) => $s !== '' && $s !== 'all');
+
+        if (!empty($filtered)) {
             $args['tax_query'] = [
                 [
                     'taxonomy' => SVLTI_BLOG_CATEGORY,
-                    'field' => 'slug',
-                    'terms' => [$category_slug],
+                    'field'    => 'slug',
+                    'terms'    => array_values($filtered),
+                    'operator' => 'IN',
                 ],
             ];
         }
@@ -69,40 +72,58 @@ if (!function_exists('svlti_blog_card_data')) {
 
         // blog categories
         $categories = get_the_terms($post_id, SVLTI_BLOG_CATEGORY);
-        $categories_text = '';
         if (!is_array($categories) || is_wp_error($categories)) {
             $categories = [];
         }
 
-
-
         return [
-            'title' => $blog_title,
-            'content' => $blog_content,
-            'author_name' => $author_name,
-            'date' => $post_date,
+            'title'      => $blog_title,
+            'content'    => $blog_content,
+            'author_name'=> $author_name,
+            'date'       => $post_date,
             'categories' => $categories,
-            'permalink' => get_permalink($post_id),
-            'has_thumb' => has_post_thumbnail($post_id),
+            'permalink'  => get_permalink($post_id),
+            'has_thumb'  => has_post_thumbnail($post_id),
             'thumb_html' => get_the_post_thumbnail($post_id, 'large', [
-                'alt' => esc_attr($blog_title),
+                'alt'   => esc_attr($blog_title),
                 'class' => 'w-full h-full object-cover',
             ]),
         ];
     }
 }
 
-// Current filter
-$current_category = isset($_GET['category']) ? sanitize_title(wp_unslash($_GET['category'])) : 'all';
+// Current filter — now supports multiple categories via category[] array
+$raw_cats = isset($_GET['category']) ? wp_unslash($_GET['category']) : [];
+if (!is_array($raw_cats)) {
+    $raw_cats = [$raw_cats];
+}
+$current_categories = array_map('sanitize_title', $raw_cats);
+// Treat 'all' or empty as no filter
+$current_categories = array_filter($current_categories, fn($s) => $s !== '' && $s !== 'all');
+$current_categories = array_values($current_categories);
 
-// Pill terms for pills
+// Pill terms for filter
 $category_terms = get_terms([
-    'taxonomy' => SVLTI_BLOG_CATEGORY,
+    'taxonomy'   => SVLTI_BLOG_CATEGORY,
     'hide_empty' => false,
 ]);
 
 // blogs query
-$blogs_q = svlti_get_blogs_query($current_category, 9);
+$blogs_q = svlti_get_blogs_query($current_categories, 9);
+
+// Build label for the button
+if (empty($current_categories)) {
+    $filter_label = 'All Categories';
+} elseif (count($current_categories) === 1) {
+    // Find the term name
+    $matched = array_filter(
+        is_array($category_terms) ? $category_terms : [],
+        fn($t) => $t->slug === $current_categories[0]
+    );
+    $filter_label = !empty($matched) ? reset($matched)->name : ucfirst($current_categories[0]);
+} else {
+    $filter_label = count($current_categories) . ' filters active';
+}
 ?>
 
 <!-- wp:group {"className":"w-full py-8"} -->
@@ -112,34 +133,88 @@ $blogs_q = svlti_get_blogs_query($current_category, 9);
     <div class="flex flex-wrap justify-between items-center mb-8">
         <h2 class="text-3xl md:text-4xl font-bold text-[#2b8c77]">Blog</h2>
 
+        <!-- Multi-select filter dropdown -->
+        <div class="svlti-filter-wrap" style="position:relative; display:inline-block;">
+            <button
+                type="button"
+                class="custom-filter-btn px-4"
+                aria-expanded="false"
+                aria-haspopup="true"
+                id="svlti-blogs-filter-btn"
+                onclick="svltiBlogsToggleFilter(this)"
+            >
+                <?= esc_html($filter_label) ?>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" style="width:14px;height:14px;margin-left:8px;transition:transform 0.2s;" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                </svg>
+            </button>
 
-        <div class="relative inline-block text-left relative-dropdown-container w-full md:w-auto mt-4 md:mt-0">
-            <div class="flex justify-end">
-                <button type="button" class="custom-filter-btn px-4" aria-expanded="false" aria-haspopup="true"
-                    onclick="const menu = this.nextElementSibling; const expanded = this.getAttribute('aria-expanded') === 'true'; this.setAttribute('aria-expanded', !expanded); menu.classList.toggle('hidden');">
-                    Filter
-                </button>
-                <div
-                    class="hidden absolute right-0 z-50 mt-14 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <div class="py-1">
-                        <a href="<?= svlti_blogs_build_url(['category' => 'all']) ?>"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 <?= ($current_category === 'all' ? 'bg-gray-100 font-bold text-[#2b8c77]' : '') ?>">
-                            All
-                        </a>
+            <form
+                id="svlti-blogs-filter-form"
+                method="get"
+                action=""
+                class="svlti-filter-dropdown hidden"
+                style="
+                    position: absolute;
+                    top: calc(100% + 8px);
+                    right: 0;
+                    z-index: 9999;
+                    min-width: 220px;
+                    background: #fff;
+                    border-radius: 10px;
+                    box-shadow: 0 8px 24px rgba(0,0,0,0.13);
+                    border: 1px solid rgba(0,0,0,0.08);
+                    padding: 8px 0;
+                "
+            >
+                <!-- "All" resets selection -->
+                <label class="svlti-filter-item" style="display:flex;align-items:center;gap:10px;padding:9px 16px;cursor:pointer;font-size:0.875rem;color:#374151;transition:background 0.15s;">
+                    <input
+                        type="checkbox"
+                        name="svlti_all_cats"
+                        id="svlti-cat-all"
+                        value="1"
+                        onchange="svltiBlogsSelectAll(this)"
+                        <?= empty($current_categories) ? 'checked' : '' ?>
+                        style="accent-color:#2b8c77;width:15px;height:15px;cursor:pointer;"
+                    >
+                    <span style="font-weight:<?= empty($current_categories) ? '600' : '400' ?>;color:<?= empty($current_categories) ? '#2b8c77' : 'inherit' ?>;">All Categories</span>
+                </label>
 
-                        <?php if (!is_wp_error($category_terms) && !empty($category_terms)): ?>
-                            <?php foreach ($category_terms as $term):
-                                $active = ($current_category === $term->slug);
-                                ?>
-                                <a href="<?= svlti_blogs_build_url(['category' => $term->slug]) ?>"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 <?= ($active ? 'bg-gray-100 font-bold text-[#2b8c77]' : '') ?>">
-                                    <?= esc_html($term->name) ?>
-                                </a>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </div>
+                <div style="height:1px;background:#e5e7eb;margin:4px 0;"></div>
+
+                <?php if (!is_wp_error($category_terms) && !empty($category_terms)): ?>
+                    <?php foreach ($category_terms as $term):
+                        $checked = in_array($term->slug, $current_categories, true);
+                        ?>
+                        <label class="svlti-filter-item" style="display:flex;align-items:center;gap:10px;padding:9px 16px;cursor:pointer;font-size:0.875rem;color:#374151;transition:background 0.15s;">
+                            <input
+                                type="checkbox"
+                                name="category[]"
+                                value="<?= esc_attr($term->slug) ?>"
+                                onchange="svltiBlogsCatChange(this)"
+                                <?= $checked ? 'checked' : '' ?>
+                                style="accent-color:#2b8c77;width:15px;height:15px;cursor:pointer;"
+                            >
+                            <span style="font-weight:<?= $checked ? '600' : '400' ?>;color:<?= $checked ? '#2b8c77' : 'inherit' ?>;"><?= esc_html($term->name) ?></span>
+                        </label>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+                <div style="padding:8px 16px 4px;display:flex;gap:8px;">
+                    <button
+                        type="submit"
+                        style="flex:1;padding:8px 0;background:#2b8c77;color:#fff;border:none;border-radius:8px;font-size:0.8125rem;font-weight:600;cursor:pointer;transition:background 0.2s;"
+                        onmouseover="this.style.background='#247565'" onmouseout="this.style.background='#2b8c77'"
+                    >Apply</button>
+                    <button
+                        type="button"
+                        onclick="svltiBlogsClearFilter()"
+                        style="flex:1;padding:8px 0;background:#f3f4f6;color:#374151;border:none;border-radius:8px;font-size:0.8125rem;font-weight:600;cursor:pointer;transition:background 0.2s;"
+                        onmouseover="this.style.background='#e5e7eb'" onmouseout="this.style.background='#f3f4f6'"
+                    >Clear</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
     <!-- /wp:html -->
@@ -181,10 +256,6 @@ $blogs_q = svlti_get_blogs_query($current_category, 9);
                             </div>
                         <?php endif; ?>
 
-
-
-
-
                         <div class="mt-10">
                             <div class="flex items-center gap-2 mb-4 text-xs font-bold tracking-widest uppercase">
                                 <span class="text-[#2b8c77]">
@@ -215,3 +286,80 @@ $blogs_q = svlti_get_blogs_query($current_category, 9);
 
 </div>
 <!-- /wp:group -->
+
+<script>
+(function () {
+    // Toggle the dropdown open/close
+    window.svltiBlogsToggleFilter = function (btn) {
+        var form = document.getElementById('svlti-blogs-filter-form');
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        form.classList.toggle('hidden');
+        // rotate chevron
+        var svg = btn.querySelector('svg');
+        if (svg) svg.style.transform = expanded ? '' : 'rotate(180deg)';
+    };
+
+    // Clicking "All Categories" unchecks everything else
+    window.svltiBlogsSelectAll = function (allBox) {
+        if (allBox.checked) {
+            var catBoxes = document.querySelectorAll('#svlti-blogs-filter-form input[name="category[]"]');
+            catBoxes.forEach(function (cb) { cb.checked = false; });
+        }
+    };
+
+    // Checking any category unchecks "All"
+    window.svltiBlogsCatChange = function (cb) {
+        if (cb.checked) {
+            var allBox = document.getElementById('svlti-cat-all');
+            if (allBox) allBox.checked = false;
+        } else {
+            // if nothing checked, re-check All
+            var catBoxes = document.querySelectorAll('#svlti-blogs-filter-form input[name="category[]"]:checked');
+            if (catBoxes.length === 0) {
+                var allBox2 = document.getElementById('svlti-cat-all');
+                if (allBox2) allBox2.checked = true;
+            }
+        }
+    };
+
+    // Clear all — recheck "All" and navigate
+    window.svltiBlogsClearFilter = function () {
+        var allBox = document.getElementById('svlti-cat-all');
+        if (allBox) allBox.checked = true;
+        var catBoxes = document.querySelectorAll('#svlti-blogs-filter-form input[name="category[]"]');
+        catBoxes.forEach(function (cb) { cb.checked = false; });
+        // Navigate to current page without category param
+        var url = new URL(window.location.href);
+        url.searchParams.delete('category');
+        url.searchParams.delete('category[]');
+        url.searchParams.delete('paged');
+        window.location.href = url.toString();
+    };
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function (e) {
+        var wrap = document.querySelector('.svlti-filter-wrap');
+        if (wrap && !wrap.contains(e.target)) {
+            var form = document.getElementById('svlti-blogs-filter-form');
+            var btn  = document.getElementById('svlti-blogs-filter-btn');
+            if (form && !form.classList.contains('hidden')) {
+                form.classList.add('hidden');
+                if (btn) {
+                    btn.setAttribute('aria-expanded', 'false');
+                    var svg = btn.querySelector('svg');
+                    if (svg) svg.style.transform = '';
+                }
+            }
+        }
+    });
+
+    // Reset paged when submitting
+    document.getElementById('svlti-blogs-filter-form').addEventListener('submit', function () {
+        // remove old paged param from action
+        var url = new URL(window.location.href);
+        url.searchParams.delete('paged');
+        this.action = url.pathname + (url.search ? url.search : '');
+    });
+})();
+</script>
