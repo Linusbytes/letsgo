@@ -10,7 +10,8 @@
 
 
     <!-- wp:group {"className":"bg-white rounded-2xl shadow-2xl p-8 relative","layout":{"type":"constrained"}} -->
-    <div class="wp-block-group bg-white rounded-2xl shadow-2xl p-8 relative">
+    <div class="wp-block-group bg-white rounded-2xl shadow-2xl p-8 relative" data-joinus-card
+        data-categories="teaching,admin">
 
 
 
@@ -49,7 +50,8 @@
                     <!-- /wp:heading -->
 
                     <!-- wp:paragraph {"className":"text-neutral-120 text-paragraph-sm"} -->
-                    <p class="text-neutral-120 text-paragraph-sm">Teach English and basic computer skills to students of all ages</p>
+                    <p class="text-neutral-120 text-paragraph-sm">Teach English and basic computer skills to students of
+                        all ages</p>
                     <!-- /wp:paragraph -->
                 </div>
                 <!-- /wp:group -->
@@ -62,7 +64,8 @@
                     <!-- /wp:heading -->
 
                     <!-- wp:paragraph {"className":"text-neutral-120 text-paragraph-sm"} -->
-                    <p class="text-neutral-120 text-paragraph-sm">Basic English proficiency and patience with learners</p>
+                    <p class="text-neutral-120 text-paragraph-sm">Basic English proficiency and patience with learners
+                    </p>
                     <!-- /wp:paragraph -->
                 </div>
                 <!-- /wp:group -->
@@ -102,8 +105,7 @@
 
                 <!-- wp:image {"sizeSlug":"large","className":"w-full h-96 rounded-xl overflow-hidden"} -->
                 <figure class="wp-block-image size-large w-full h-96 rounded-xl overflow-hidden">
-                    <img
-                        src="<?php echo get_template_directory_uri(); ?>/assets/images/listing/students.png"
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/listing/students.png"
                         alt="Volunteer teaching students" />
                 </figure>
                 <!-- /wp:image -->
@@ -111,7 +113,8 @@
                 <!-- wp:buttons {"className":"self-end"} -->
                 <div class="wp-block-buttons self-end">
                     <!-- wp:button {"className":"text-white font-semibold rounded-md bg-gradient-to-r from-[#2CA585] to-[#2C89A5]"} -->
-                    <div class="wp-block-button hero-button text-white font-semibold rounded-md bg-gradient-to-r from-[#2CA585] to-[#2C89A5]">
+                    <div
+                        class="wp-block-button hero-button text-white font-semibold rounded-md bg-gradient-to-r from-[#2CA585] to-[#2C89A5]">
                         <a class="wp-block-button__link wp-element-button">I want to Volunteer</a>
                     </div>
                     <!-- /wp:button -->

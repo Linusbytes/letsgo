@@ -437,3 +437,19 @@ html {
 .custom-filter-btn:hover svg {
     fill: white;
 }
+
+/* Multi-select filter dropdown item hover */
+.svlti-filter-item:hover {
+    background-color: #f9fafb;
+}
+
+/* Ensure anchor containers don't clip the dropdown */
+.svlti-filter-wrap,
+.svlti-hl-filter-wrap {
+    position: relative;
+}
+
+.svlti-filter-dropdown {
+    /* ensure it sits above everything */
+    z-index: 9999;
+}
