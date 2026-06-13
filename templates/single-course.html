@@ -221,38 +221,52 @@
         </div>
         
         <div class="course-tab-content hidden transition-opacity" data-content="resources">
-            <div class="border border-gray-300 rounded-xl p-6 mb-4 cursor-pointer bg-gray-100 hover:bg-gray-200 transition-colors">
-                <div class="flex justify-between items-center">
+            <!-- Accordion Item 1 -->
+            <div class="resource-accordion-item border border-gray-300 rounded-xl p-6 mb-4 bg-gray-100 hover:bg-gray-200 transition-all duration-200">
+                <div class="resource-accordion-header flex justify-between items-center cursor-pointer">
                     <div class="flex items-center gap-4">
                         <span class="text-2xl">🎙️</span>
                         <span class="font-semibold text-base">Podcast Episode: Voices of Guiding</span>
                     </div>
-                    <span class="text-xl">▼</span>
+                    <span class="resource-accordion-arrow text-xl">▼</span>
+                </div>
+                <div class="resource-accordion-content hidden mt-6 pt-6 border-t border-gray-300">
+                    <p class="mb-2"><strong>Episode 1:</strong> The Art of Storytelling in Tourism (45 mins)</p>
+                    <p class="mb-2"><strong>Episode 2:</strong> Sustainable Guiding Practices &amp; Leave No Trace (50 mins)</p>
+                    <p class="m-0"><strong>Episode 3:</strong> Managing Difficult Situations &amp; Emergencies (40 mins)</p>
                 </div>
             </div>
             
-            <div class="border border-gray-300 rounded-xl p-6 mb-4 bg-gray-100">
-                <div class="flex justify-between items-center cursor-pointer">
+            <!-- Accordion Item 2 -->
+            <div class="resource-accordion-item border border-gray-300 rounded-xl p-6 mb-4 bg-gray-100 hover:bg-gray-200 transition-all duration-200">
+                <div class="resource-accordion-header flex justify-between items-center cursor-pointer">
                     <div class="flex items-center gap-4">
                         <span class="text-2xl">📚</span>
                         <span class="font-semibold text-base">Case Studies</span>
                     </div>
-                    <span class="text-xl">▲</span>
+                    <span class="resource-accordion-arrow text-xl">▲</span>
                 </div>
-                <div class="mt-6 pt-6 border-t border-gray-300">
+                <div class="resource-accordion-content mt-6 pt-6 border-t border-gray-300">
                     <p class="mb-2">Case Study 1: "Echoes of Empire - Angkor Thom Heritage Walk"</p>
                     <p class="mb-2">Case Study 2: "Life Along the Lake - Tonle Sap Community Tour"</p>
                     <p class="m-0">Case Study 3: "From Field to Feast - Battambang Agricultural Heritage Trail"</p>
                 </div>
             </div>
             
-            <div class="border border-gray-300 rounded-xl p-6 bg-gray-100 hover:bg-gray-200 transition-colors">
-                <div class="flex justify-between items-center cursor-pointer">
+            <!-- Accordion Item 3 -->
+            <div class="resource-accordion-item border border-gray-300 rounded-xl p-6 bg-gray-100 hover:bg-gray-200 transition-all duration-200">
+                <div class="resource-accordion-header flex justify-between items-center cursor-pointer">
                     <div class="flex items-center gap-4">
                         <span class="text-2xl">📝</span>
                         <span class="font-semibold text-base">Field Workbook: Route Planning &amp; Interpretation Toolkit</span>
                     </div>
-                    <span class="text-xl">▼</span>
+                    <span class="resource-accordion-arrow text-xl">▼</span>
+                </div>
+                <div class="resource-accordion-content hidden mt-6 pt-6 border-t border-gray-300">
+                    <p class="mb-2"><strong>Section 1:</strong> Route Mapping &amp; Timing Logs</p>
+                    <p class="mb-2"><strong>Section 2:</strong> Destination Fact Sheets &amp; Commentary Outlines</p>
+                    <p class="mb-2"><strong>Section 3:</strong> Risk Assessment Templates &amp; Emergency Contacts</p>
+                    <p class="m-0"><strong>Section 4:</strong> Public Interpretation &amp; Storytelling Activities</p>
                 </div>
             </div>
         </div>
@@ -294,6 +308,27 @@ document.addEventListener('DOMContentLoaded', function() {
             if (targetContent) {
                 targetContent.classList.remove('hidden');
                 targetContent.classList.add('block');
+            }
+        });
+    });
+
+    // Accordion functionality for learning resources
+    const accordionHeaders = document.querySelectorAll('.resource-accordion-header');
+    accordionHeaders.forEach(function(header) {
+        header.addEventListener('click', function() {
+            const item = this.closest('.resource-accordion-item');
+            const content = item.querySelector('.resource-accordion-content');
+            const arrow = this.querySelector('.resource-accordion-arrow');
+            
+            if (content) {
+                const isHidden = content.classList.contains('hidden');
+                if (isHidden) {
+                    content.classList.remove('hidden');
+                    arrow.textContent = '▲';
+                } else {
+                    content.classList.add('hidden');
+                    arrow.textContent = '▼';
+                }
             }
         });
     });
