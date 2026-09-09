@@ -49,6 +49,17 @@ function svlti_scripts() {
 }
 add_action('wp_enqueue_scripts', 'svlti_scripts');
 
+// Add Vercel Web Analytics
+function svlti_vercel_analytics() {
+  ?>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <?php
+}
+add_action('wp_head', 'svlti_vercel_analytics');
+
 // Register default terms for all taxonomies
 function svlti_seed_tax() {
   // Seed event-audience
