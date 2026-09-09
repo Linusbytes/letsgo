@@ -152,6 +152,16 @@ async function main() {
             html = html.split(`http://${SERVER_HOST}`).join('');
             html = html.split(`https://${SERVER_HOST}`).join('');
 
+            // Inject Vercel Web Analytics if not already present
+            if (!html.includes('/_vercel/insights/script.js')) {
+                const analyticsScript = `  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>`;
+                html = html.replace('</head>', analyticsScript);
+            }
+
             // Write HTML file to disk
             let targetFile;
             if (pagePath === '/' || pagePath === '') {
