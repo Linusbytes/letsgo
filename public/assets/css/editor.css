@@ -1,0 +1,42 @@
+/* Only affects Site Editor */
+.editor-styles-wrapper .mission-img.wp-block-image {
+  max-width: 70% !important;
+  height: auto !important;
+}
+
+.editor-styles-wrapper .mission-container {
+  transform: scale(0.8);
+  transform-origin: top left;
+}
+
+/* === FIX policy hero layout only inside the Site Editor === */
+.editor-styles-wrapper .wp-block-group.relative {
+  flex-wrap: nowrap !important;
+  align-items: left !important;
+}
+
+
+/* Blue section behaves like left column */
+.editor-styles-wrapper .wp-block-group.bg-light-blue {
+  flex: 1 1 50%;
+  min-height: 75vh;
+}
+
+/* The image appears on the right in editor */
+.editor-styles-wrapper .policy-img {
+  position: static !important;
+  width: 45% !important;
+  max-width: 28rem !important;
+  margin-left: auto !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure layout stays side-by-side in frontend */
+.policies-row {
+  flex-wrap: nowrap !important;
+}
+
+.editor-styles-wrapper .assessment-container {
+  width: 100% !important;
+  max-width: 100% !important;
+}

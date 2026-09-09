@@ -1,0 +1,455 @@
+html {
+    scroll-behavior: smooth;
+}
+
+/* Navigation hover state */
+.site-nav li:hover {
+    color: var(--wp--preset--color--dark-green, #174c3f);
+}
+
+.site-nav li {
+    position: relative;
+    transition: color 0.3s ease-in-out;
+}
+
+.site-nav li::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: var(--wp--preset--color--dark-green);
+    transition: width 0.5s ease-in-out;
+}
+
+.site-nav li:hover::after {
+    width: 100%;
+}
+
+/* IMAGE BLOCK */
+.is-style-default {
+    @apply block w-auto;
+}
+
+/* Vision pill transition */
+.fade-in {
+    @apply opacity-0 translate-y-5 transition-opacity transition-transform duration-700 ease-out;
+}
+
+.fade-in.visible {
+    @apply opacity-100 translate-y-0;
+}
+
+/* Header navigation dropdown */
+.wp-block-navigation__submenu-icon {
+    display: none !important;
+}
+
+.wp-block-navigation-submenu .wp-block-navigation-item__content {
+    font-weight: 500;
+}
+
+.wp-block-navigation__submenu-container a {
+    border-bottom: 1px solid #b0c8d4;
+}
+
+.wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+    font-weight: 500;
+    background-color: #cedfdb;
+    justify-content: center;
+}
+
+/* Dropdown container*/
+.wp-block-navigation__submenu-container {
+    background-color: #cedfdb;
+    overflow: hidden !important;
+    color: #515160 !important;
+}
+
+.wp-block-navigation__submenu-container li:hover {
+    color: #2c89a5;
+}
+
+.wp-block-navigation ul li {
+    flex: auto !important;
+    justify-content: center !important;
+    color: #515160;
+    z-index: 50;
+}
+
+.wp-block-navigation ul li>ul {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    text-align: center !important;
+
+}
+
+/* Show submenu on hover */
+
+.navigation-link {
+    @apply px-4 py-2;
+}
+
+.navigation-link {
+    list-style-type: none !important;
+}
+
+.hero-button a {
+    border-radius: 0.375rem;
+    transition: background-color 0.5s ease, color 0.3s ease;
+    padding-inline: 30px;
+}
+
+.hero-button a:hover {
+    background-color: #7EDDC3B2;
+}
+
+/* Policy side-menu */
+.policy-menu {
+    width: 180px !important;
+    flex: 0 0 220px !important;
+    align-self: flex-start;
+}
+
+/* Remove default bullets and spacing */
+.policy-menu ul,
+.policy-menu li {
+    list-style-type: none;
+}
+
+/* Ensure every item is consistent */
+.policy-menu .wp-block-navigation-item {
+    width: 100%;
+    /* ensures li fills menu width */
+    border: none;
+    /* remove inconsistent default WP borders */
+}
+
+/* Each link spans full width and owns its divider */
+.policy-menu .wp-block-navigation-link a,
+.policy-menu .wp-block-navigation-item__content {
+    display: block;
+    width: 100%;
+    padding: 0 0 10px 10px;
+    /* left padding for text */
+    color: #747480;
+    font-weight: 450;
+    border-bottom: 1px solid #ccc;
+    /* clean, equal-width divider */
+    transition: color 0.3s, font-weight 0.3s;
+}
+
+/* Hover and active states */
+.policy-menu .wp-block-navigation-item:hover a,
+.policy-menu .wp-block-navigation-item__content:hover,
+.policy-menu .wp-block-navigation-item.current-menu-item a,
+.policy-menu .wp-block-navigation-item__content[aria-current="page"],
+.policy-menu .wp-block-navigation-item__content[aria-current="true"] {
+    color: var(--wp--preset--color--dark-green, #174c3f);
+    font-weight: 500;
+}
+
+/* Remove bottom border from the last link */
+.policy-menu .wp-block-navigation-item:last-child .wp-block-navigation-item__content {
+    border-bottom: none;
+}
+
+/* Policy section icons */
+.policy-icon img {
+    width: 3rem !important;
+    height: auto;
+}
+
+.error-button a {
+    padding: 15px 80px;
+}
+
+.filter-button a {
+    display: inline-block;
+    width: 100%;
+    padding: 0.75rem 2rem;
+    border: 2px solid #d1d5db;
+    color: #6b7280;
+    border-radius: 9999px;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease;
+    background: transparent;
+    text-decoration: none;
+}
+
+.filter-button a:hover,
+.filter-button a:focus {
+    background-color: #2b8c77;
+    border-color: #2b8c77;
+    color: #ffffff;
+}
+
+
+.join-button a {
+    all: unset;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 3rem;
+    border-radius: 0.5rem;
+    background: linear-gradient(to right, #5AD3B3, #5AB7D3);
+    color: white;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+
+.submit-button a {
+    all: unset;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 3rem;
+    border-radius: 0.5rem;
+    background: grey;
+    color: white;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+
+.listing-button a {
+    background-color: #7EC7DD;
+    color: white;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    transition: background-color 0.2s;
+}
+
+.listing-card h3,
+.listing-card p {
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.listing-card .wp-block-group p.inline-block {
+    display: inline-block !important;
+    width: fit-content !important;
+}
+
+.listing-card .wp-block-buttons {
+    justify-content: flex-end !important;
+}
+
+.find-img img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+
+.policy-img img {
+    width: 100%;
+    height: auto;
+}
+
+.life-skills-img img {
+    width: 75%;
+    height: auto;
+    display: block;
+    /* Required for margin auto centering */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* blog */
+
+.blogNav .wp-block-navigation ul li>ul {
+
+    right: 50% !important;
+    justify-items: center;
+
+}
+
+/* Upcoming event css */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 36px;
+}
+
+/* responsive */
+@media(min-width: 640px) {
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(min-width: 1024px) {
+    .events-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* easier to edit styling from event-card instead of inline */
+.event-card {
+    width: 100%;
+    height: 278px;
+    padding: 16px 21px;
+    gap: 22px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+.event-card:hover {
+    background-color: #7EDDC3 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.event-card.closest {
+    background-color: #7EDDC3;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #ccc;
+    margin-top: 25px;
+}
+
+.upcoming-events-title {
+    font-size: 1.875rem !important;
+    font-weight: 800 !important;
+    color: #207860 !important;
+    margin-bottom: 10px !important;
+    line-height: 1.2 !important;
+}
+
+.details-button a {
+    padding: 10px 10px;
+}
+
+.listing-action-reject-button a {
+    padding: 10px 25px;
+    color: gray;
+    display: block;
+}
+
+.listing-action-reject-button:hover a {
+    color: white;
+    transition: color 0.5s ease;
+}
+
+.corner-images img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Example: style only forms with this class */
+.svlti-form {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .12);
+}
+
+.svlti-form input[type="text"],
+.svlti-form input[type="email"],
+.svlti-form select,
+.svlti-form textarea {
+    width: 100%;
+    border: 1px solid #d7dde5;
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+/* WPForms submit button */
+.svlti-form .wpforms-submit-container {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.svlti-form button.wpforms-submit {
+    background: var(--wp--preset--color--brand);
+    color: #fff;
+    border: 0;
+    border-radius: 10px;
+    padding: 18px 60px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform .15s ease, filter .15s ease;
+}
+
+.svlti-form button.wpforms-submit:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+}
+
+.svlti-form button.wpforms-submit:active {
+    transform: translateY(0);
+    filter: brightness(.98);
+}
+
+/* Custom Filter Button */
+.custom-filter-btn {
+    width: auto;
+    min-width: 50px;
+    height: 50px;
+    padding: 0 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.192);
+    cursor: pointer;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.021);
+    transition: all 0.3s;
+    background: white;
+    font-weight: 500;
+    color: rgb(77, 77, 77);
+}
+
+.custom-filter-btn svg {
+    height: 16px;
+    fill: rgb(77, 77, 77);
+    transition: all 0.3s;
+}
+
+.custom-filter-btn:hover {
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.11);
+    background-color: rgb(59, 59, 59);
+    color: white;
+}
+
+.custom-filter-btn:hover svg {
+    fill: white;
+}
+
+/* Multi-select filter dropdown item hover */
+.svlti-filter-item:hover {
+    background-color: #f9fafb;
+}
+
+/* Ensure anchor containers don't clip the dropdown */
+.svlti-filter-wrap,
+.svlti-hl-filter-wrap {
+    position: relative;
+}
+
+.svlti-filter-dropdown {
+    /* ensure it sits above everything */
+    z-index: 9999;
+}
