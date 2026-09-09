@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVLTI – Siloam Vocational & Life Skills Training Institute</title>
+    <meta name="description" content="Shaping Tomorrow's Leaders. Learn more about the Siloam Vocational & Life Skills Training Institute, where excellence in education shapes well-rounded global citizens.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <style>
+        :root {
+            --brand: #1C8A6A;
+            --dark-green: #195D4B;
+            --light-green: #A2E7D499;
+            --light-blue: #C9EDFC;
+            --eucalyptus-80: #5AD3B3;
+            --elm-80: #5AB7D3;
+            --wp--preset--color--brand: #1C8A6A;
+            --wp--preset--color--dark-green: #195D4B;
+            --wp--preset--color--light-green: #A2E7D499;
+            --wp--preset--color--light-blue: #C9EDFC;
+            --wp--preset--color--white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: linear-gradient(to bottom, #ffffff, var(--light-blue));
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #333;
+        }
+
+        /* Header */
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 12px 64px;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-group img {
+            width: 64px;
+            height: auto;
+        }
+
+        .logo-group h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--brand);
+        }
+
+        .site-nav {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            font-weight: 500;
+            color: var(--brand);
+            font-size: 0.95rem;
+        }
+
+        .site-nav li {
+            position: relative;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .site-nav li::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--dark-green);
+            transition: width 0.5s ease-in-out;
+        }
+
+        .site-nav li:hover { color: var(--dark-green); }
+        .site-nav li:hover::after { width: 100%; }
+
+        .site-nav a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        .hero-section h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700;
+            color: var(--brand);
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+
+        .hero-section h1 span {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-section h1 span img {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -8px;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        .hero-section p {
+            color: var(--brand);
+            max-width: 640px;
+            margin: 0 auto 32px;
+            font-size: 1.15rem;
+            line-height: 1.7;
+        }
+
+        .hero-button {
+            display: inline-block;
+            padding: 14px 36px;
+            border-radius: 8px;
+            background: linear-gradient(to right, #2CA585, #2C89A5);
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: background-color 0.5s ease, transform 0.2s ease;
+        }
+
+        .hero-button:hover {
+            background: linear-gradient(to right, #7EDDC3B2, #7EC7DDB2);
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            margin-top: 48px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Banner */
+        .banner {
+            background-color: var(--dark-green);
+            color: #fff;
+            text-align: center;
+            padding: 28px 20px;
+        }
+
+        .banner h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Mission / Vision sections */
+        .content-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 64px 24px;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--brand);
+            margin-bottom: 20px;
+        }
+
+        .content-section p {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: #515160;
+            max-width: 800px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #666679;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--dark-green);
+            color: #fff;
+            text-align: center;
+            padding: 32px 20px;
+            margin-top: 64px;
+            font-size: 0.9rem;
+        }
+
+        .site-footer a {
+            color: #7EDDC3;
+            text-decoration: none;
+        }
+
+        /* Fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .site-header { padding: 12px 20px; flex-direction: column; gap: 12px; }
+            .site-nav { gap: 20px; flex-wrap: wrap; justify-content: center; }
+            .hero-section { padding: 48px 16px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="logo-group">
+            <img src="/assets/images/logo.png" alt="SVLTI Logo">
+            <h2>SVLTI</h2>
+        </div>
+        <nav>
+            <ul class="site-nav">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#mission">Mission</a></li>
+                <li><a href="#vision">Vision</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="hero-section fade-in">
+        <h1>
+            Shaping Tomorrow's<br>
+            <span>
+                Leaders
+                <img src="/assets/images/home/underline.png" alt="">
+            </span>
+        </h1>
+        <p>
+            Learn more about the Siloam Vocational &amp; Life Skills Training Institute,
+            where excellence in education shapes well-rounded global citizens.
+        </p>
+        <a href="#mission" class="hero-button">Learn more</a>
+        <div class="hero-image">
+            <img src="/assets/images/home/hero.png" alt="SVLTI Students">
+        </div>
+    </section>
+
+    <!-- Banner -->
+    <div class="banner">
+        <h2>School Vision, Mission and History</h2>
+    </div>
+
+    <!-- Mission -->
+    <section id="mission" class="content-section fade-in">
+        <h2>Our Mission</h2>
+        <p>
+            To provide quality vocational education and life skills training that empowers
+            students to become competent, compassionate and contributing members of society.
+        </p>
+        <div class="content-grid">
+            <div class="card">
+                <h3>🎓 Quality Education</h3>
+                <p>Comprehensive vocational programs designed to meet industry standards and prepare students for the workforce.</p>
+            </div>
+            <div class="card">
+                <h3>🤝 Community Focus</h3>
+                <p>Building empathy and strong community connections through service-learning projects and outreach programmes.</p>
+            </div>
+            <div class="card">
+                <h3>🌏 Global Citizens</h3>
+                <p>Developing well-rounded individuals equipped with the skills and values to thrive in an interconnected world.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision -->
+    <section id="vision" class="content-section fade-in">
+        <h2>Our Vision</h2>
+        <p>
+            A community of life-ready learners empowered through vocational excellence,
+            compassion, and purposeful engagement with the world.
+        </p>
+        <div class="content-grid">
+            <div class="card">
+                <h3>💻 Computer Skills</h3>
+                <p>Digital literacy and technical proficiency to navigate the modern workplace with confidence.</p>
+            </div>
+            <div class="card">
+                <h3>💬 English Competencies</h3>
+                <p>Strong communication skills in English for academic success and professional opportunities.</p>
+            </div>
+            <div class="card">
+                <h3>🏨 Tourism & Hospitality</h3>
+                <p>Hands-on training in the tourism and hospitality industry, one of the region's fastest-growing sectors.</p>
+            </div>
+            <div class="card">
+                <h3>❤️ Empathy & Community</h3>
+                <p>Cultivating compassion and social responsibility through community service and collaborative projects.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="site-footer">
+        <p>&copy; 2025 Siloam Vocational &amp; Life Skills Training Institute. All rights reserved.</p>
+        <p style="margin-top: 8px; opacity: 0.7;">Built with care by the SVLTI Team</p>
+    </footer>
+
+    <!-- Fade-in animation script -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

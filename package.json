@@ -1,7 +1,7 @@
 {
     "scripts": {
         "build": "npx tailwindcss -i ./tailwind.css -o ./assets/css/main.css --minify && npm run copy-assets",
-        "copy-assets": "npx copyfiles -u 0 \"assets/**/*\" \"style.css\" \"screenshot.png\" public",
+        "copy-assets": "npx copyfiles -u 0 \"assets/**/*\" \"style.css\" \"screenshot.png\" \"index.html\" public",
         "watch": "npx tailwindcss -i ./tailwind.css -o ./assets/css/main.css --watch",
         "lint": "npx prettier --check ."
     },
